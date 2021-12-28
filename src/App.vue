@@ -8,6 +8,29 @@
   <h2 class="underline">Underline text</h2>
 
   <!-- to apply dynamic classes -->
+  <h2 class="underline" v-bind:class="status">Status</h2>
+  <h2 v-bind:class="isPromoted && 'promoted'">Promoted Movie</h2>
+
+  <h2 v-bind:class="isSoldOut ? 'sold-out' : 'new'">Movie sold out</h2>
+
+  <!-- Bind an array of classes-->
+  <h2 v-bind:class="['new', 'promoted']">Newly promoted movie</h2>
+
+  <!-- Array conditional  -->
+  <h2 v-bind:class="[isPromoted && 'promoted', isSoldOut ? 'sold-out' : 'new']">
+    Array conditional movie
+  </h2>
+
+  <!-- Object conditional  -->
+  <h2
+    v-bind:class="{
+      promoted: isPromoted,
+      new: !isSoldOut,
+      'sold-out': isSoldOut,
+    }"
+  >
+    Object conditional movie
+  </h2>
 </template>
 
 <script>
@@ -24,6 +47,9 @@ export default {
       hack: `<a href="#" onclick="alert('You have been hacked')">Win a prize</a>`,
       headingId: "heading",
       isDisabled: true,
+      status: "danger",
+      isPromoted: true,
+      isSoldOut: true,
     };
   },
 };
@@ -44,5 +70,15 @@ export default {
 }
 .underline {
   text-decoration: underline;
+}
+
+.promoted {
+  font-style: italic;
+}
+.new {
+  color: olivedrab;
+}
+.sold-out {
+  color: red;
 }
 </style>
